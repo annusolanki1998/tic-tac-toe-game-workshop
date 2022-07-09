@@ -14,16 +14,21 @@ public class TicTacToe {
         System.out.println(gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8]);
     }
 
-
     public static char user() {
         System.out.println("Enter your choice  X or 0 only");
         return scanner.next().toUpperCase().charAt(0);
     }
 
+    public static void ticTacToe() {
+        for (int i = 0; i < gameBoard.length; i++) {
+            gameBoard[i] = ' ';
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe");
         createBoard();
         user();
+        ticTacToe();
     }
 }
