@@ -4,15 +4,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
-
     static char[] gameBoard = new char[10];
-
     static Scanner scanner = new Scanner(System.in);
     static char user = '1';
     static int userPosition;
-    static char userTurn;
     static int computerPosition;
     static char computerTurn;
+    static char userTurn;
     static char exitCode = '0';
     static int turnCount;
 
@@ -21,9 +19,8 @@ public class TicTacToe {
         System.out.println(gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5]);
         System.out.println(gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8]);
     }
-
-    public static char user(Scanner scanner) {
-        System.out.println("Enter your choice  X or 0 only");
+    public static char userChoose(Scanner scanner) {
+        System.out.println("Enter your choice  X or O only");
         return TicTacToe.scanner.next().toUpperCase().charAt(0);
     }
 
@@ -86,15 +83,26 @@ public class TicTacToe {
                     break;
                 default:
                     System.out.println("Choose correct number");
-
+                    return;
             }
+            winner(userTurn);
+        } else if (user == '2') {
+            turnCount = turnCount + 1;
+            System.out.println("Computer turn");
+            if (turnCount == 2 || turnCount == 3 || turnCount == 4)
+                blockUser();
+            else
+                computerMove();
+            winner(computerTurn);
         }
     }
 
     public static void computerMove() {
         boolean flag = false;
+        System.out.println("Player choose [0-8]");
         while (true) {
-            computerPosition = (int) (Math.random() * 8);
+            Random rand = new Random();
+            computerPosition = rand.nextInt(9);
             switch (computerPosition) {
                 case 0:
                     if (gameBoard[0] == ' ') {
@@ -229,7 +237,6 @@ public class TicTacToe {
         }
     }
 
-
     public static void blockUser() {
         if (gameBoard[0] == userTurn && gameBoard[1] == userTurn) {
             gameBoard[2] = computerTurn;
@@ -271,17 +278,17 @@ public class TicTacToe {
     }
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Tic Tac Toe ");
+        System.out.println("Welcome to Tic Toc toe Program");
         ticTacToe();
-        userTurn = user(scanner);
+        userTurn = userChoose(scanner);
         computerTurn = (userTurn == 'X') ? 'O' : 'X';
         createBoard();
         int Toss;
         int wonToss;
         System.out.println("Choose\n 0. Heads\n 1. Tails\nEnter you choice [0-1] : ");
         Toss = scanner.nextInt();
-        Random random = new Random();
-        wonToss = random.nextInt(2);
+        Random rand1 = new Random();
+        wonToss = rand1.nextInt(2);
 
         if (wonToss == Toss) {
             System.out.println("You won the toss");
@@ -321,8 +328,6 @@ public class TicTacToe {
                 }
             }
         }
+
     }
 }
-
-
-
