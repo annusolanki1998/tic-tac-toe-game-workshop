@@ -8,7 +8,6 @@ public class TicTacToe {
     static char[] gameBoard = new char[10];
 
     static Scanner scanner = new Scanner(System.in);
-
     static char user = '1';
     static int userPosition;
     static char userTurn;
@@ -241,8 +240,8 @@ public class TicTacToe {
         int wonToss;
         System.out.println("Choose\n 0. Heads\n 1. Tails\nEnter you choice [0-1] : ");
         Toss = scanner.nextInt();
-        Random rand1 = new Random();
-        wonToss = rand1.nextInt(2);
+        Random random = new Random();
+        wonToss = random.nextInt(2);
 
         if (wonToss == Toss) {
             System.out.println("You won the toss");
@@ -282,10 +281,7 @@ public class TicTacToe {
                 }
             }
         }
-
     }
-
-
 }
 
 
