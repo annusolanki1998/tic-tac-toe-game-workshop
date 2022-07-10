@@ -11,7 +11,8 @@ public class TicTacToe {
     static char user = '1';
     static int userPosition;
     static char userTurn;
-
+    static int computerPosition;
+    static char computerTurn;
     public static void createBoard() {
         System.out.println(gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2]);
         System.out.println(gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5]);
@@ -87,12 +88,90 @@ public class TicTacToe {
         }
     }
 
+    public static void computerMove() {
+        boolean flag = false;
+        while (true) {
+            computerPosition = (int) (Math.random() * 8);
+            switch (computerPosition) {
+                case 0:
+                    if (gameBoard[0] == ' ') {
+                        gameBoard[0] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 1:
+                    if (gameBoard[1] == ' ') {
+                        gameBoard[1] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 2:
+                    if (gameBoard[2] == ' ') {
+                        gameBoard[2] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 3:
+                    if (gameBoard[3] == ' ') {
+                        gameBoard[3] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 4:
+                    if (gameBoard[4] == ' ') {
+                        gameBoard[4] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 5:
+                    if (gameBoard[5] == ' ') {
+                        gameBoard[5] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 6:
+                    if (gameBoard[6] == ' ') {
+                        gameBoard[6] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 7:
+                    if (gameBoard[7] == ' ') {
+                        gameBoard[7] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+                case 8:
+                    if (gameBoard[8] == ' ') {
+                        gameBoard[8] = computerTurn;
+                        flag = true;
+                    }
+                    break;
+
+            }
+            if (flag) {
+                break;
+            }
+
+        }
+    }
+
+
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe");
         createBoard();
         user();
         ticTacToe();
         moveLocation();
+        computerMove();
 
     }
 }
