@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -13,15 +14,17 @@ public class TicTacToe {
     static char userTurn;
     static int computerPosition;
     static char computerTurn;
+   // public static char exitCode = '0';
+
     public static void createBoard() {
         System.out.println(gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2]);
         System.out.println(gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5]);
         System.out.println(gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8]);
     }
 
-    public static char user() {
+    public static char user(Scanner scanner) {
         System.out.println("Enter your choice  X or 0 only");
-        return scanner.next().toUpperCase().charAt(0);
+        return TicTacToe.scanner.next().toUpperCase().charAt(0);
     }
 
     public static void ticTacToe() {
@@ -166,13 +169,15 @@ public class TicTacToe {
 
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Tic Tac Toe");
-        createBoard();
-        user();
-        ticTacToe();
-        moveLocation();
-        computerMove();
-
-    }
+        System.out.println("Welcome to Tic Tac Toe ");
+            int toss = (int) (Math.random() * 2) + 1;
+            System.out.println("Choose the toss \n1.Head\n2.Tail");
+            int playerChoose = scanner.nextInt();
+            if (playerChoose == toss) {
+                System.out.println("Player win the toss");
+            } else {
+                System.out.println("Computer win the toss");
+            }
+        }
 }
 
