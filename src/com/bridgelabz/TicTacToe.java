@@ -14,7 +14,8 @@ public class TicTacToe {
     static char userTurn;
     static int computerPosition;
     static char computerTurn;
-   // public static char exitCode = '0';
+    static char exitCode = '0';
+    static int turnCount;
 
     public static void createBoard() {
         System.out.println(gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2]);
@@ -167,17 +168,125 @@ public class TicTacToe {
         }
     }
 
+    public static void winner(char symbol) {
+
+        if (gameBoard[0] != ' ' && gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2]) {
+            if (gameBoard[0] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+
+        } else if (gameBoard[3] != ' ' && gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5]) {
+            if (gameBoard[3] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        } else if (gameBoard[7] != ' ' && gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8]) {
+            if (gameBoard[7] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        } else if (gameBoard[6] != ' ' && gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6]) {
+            if (gameBoard[6] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        } else if (gameBoard[1] != ' ' && gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7]) {
+            if (gameBoard[1] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        } else if (gameBoard[5] != ' ' && gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8]) {
+            if (gameBoard[5] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        } else if (gameBoard[4] != ' ' && gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8]) {
+            if (gameBoard[4] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        } else if (gameBoard[2] != ' ' && gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6]) {
+            if (gameBoard[2] == symbol) {
+                System.out.println("Player ONE WINS THE GAME");
+            } else {
+                System.out.println("Computer WINS THE GAME");
+            }
+            exitCode = '1';
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe ");
-            int toss = (int) (Math.random() * 2) + 1;
-            System.out.println("Choose the toss \n1.Head\n2.Tail");
-            int playerChoose = scanner.nextInt();
-            if (playerChoose == toss) {
-                System.out.println("Player win the toss");
-            } else {
-                System.out.println("Computer win the toss");
+        ticTacToe();
+        userTurn = user(scanner);
+        computerTurn = (userTurn == 'X') ? 'O' : 'X';
+        createBoard();
+        int Toss;
+        int wonToss;
+        System.out.println("Choose\n 0. Heads\n 1. Tails\nEnter you choice [0-1] : ");
+        Toss = scanner.nextInt();
+        Random rand1 = new Random();
+        wonToss = rand1.nextInt(2);
+
+        if (wonToss == Toss) {
+            System.out.println("You won the toss");
+            while (true) {
+                moveLocation();
+                System.out.println("Your board");
+                createBoard();
+                winner(userTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+                computerMove();
+                System.out.println("Computer Board");
+                createBoard();
+                winner(computerTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+            }
+        } else {
+            System.out.println("Computer won the toss");
+            while (true) {
+                computerMove();
+                System.out.println("Computer Board");
+                createBoard();
+                winner(computerTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+                System.out.println("Your Turn");
+                moveLocation();
+                System.out.println("Your board");
+                createBoard();
+                winner(userTurn);
+                if (exitCode == '1') {
+                    break;
+                }
             }
         }
+
+    }
+
+
 }
+
+
 
