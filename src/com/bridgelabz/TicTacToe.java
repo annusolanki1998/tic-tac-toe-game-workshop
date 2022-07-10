@@ -13,12 +13,64 @@ public class TicTacToe {
     static char userTurn;
     static char exitCode = '0';
     static int turnCount;
+    public static void whoWillWin() {
+        ticTacToe();
+        userTurn = userChoose(scanner);
+        computerTurn = (userTurn == 'X') ? 'O' : 'X';
+        createBoard();
+        int Toss;
+        int wonToss;
+        System.out.println("Choose\n 0. Heads\n 1. Tails\nEnter you choice [0-1] : ");
+        Toss = scanner.nextInt();
+        Random rand1 = new Random();
+        wonToss = rand1.nextInt(2);
+
+        if (wonToss == Toss) {
+            System.out.println("You won the toss");
+            while (true) {
+                moveLocation();
+                System.out.println("Your board");
+                createBoard();
+                winner(userTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+                computerMove();
+                System.out.println("Computer Board");
+                createBoard();
+                winner(computerTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+            }
+        } else {
+            System.out.println("Computer won the toss");
+            while (true) {
+                computerMove();
+                System.out.println("Computer Board");
+                createBoard();
+                winner(computerTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+                System.out.println("Your Turn");
+                moveLocation();
+                System.out.println("Your board");
+                createBoard();
+                winner(userTurn);
+                if (exitCode == '1') {
+                    break;
+                }
+            }
+        }
+    }
 
     public static void createBoard() {
         System.out.println(gameBoard[0] + " | " + gameBoard[1] + " | " + gameBoard[2]);
         System.out.println(gameBoard[3] + " | " + gameBoard[4] + " | " + gameBoard[5]);
         System.out.println(gameBoard[6] + " | " + gameBoard[7] + " | " + gameBoard[8]);
     }
+
     public static char userChoose(Scanner scanner) {
         System.out.println("Enter your choice  X or O only");
         return TicTacToe.scanner.next().toUpperCase().charAt(0);
@@ -279,55 +331,14 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Toc toe Program");
-        ticTacToe();
-        userTurn = userChoose(scanner);
-        computerTurn = (userTurn == 'X') ? 'O' : 'X';
-        createBoard();
-        int Toss;
-        int wonToss;
-        System.out.println("Choose\n 0. Heads\n 1. Tails\nEnter you choice [0-1] : ");
-        Toss = scanner.nextInt();
-        Random rand1 = new Random();
-        wonToss = rand1.nextInt(2);
-
-        if (wonToss == Toss) {
-            System.out.println("You won the toss");
-            while (true) {
-                moveLocation();
-                System.out.println("Your board");
-                createBoard();
-                winner(userTurn);
-                if (exitCode == '1') {
-                    break;
-                }
-                computerMove();
-                System.out.println("Computer Board");
-                createBoard();
-                winner(computerTurn);
-                if (exitCode == '1') {
-                    break;
-                }
-            }
+        whoWillWin();
+        System.out.println("You want play another game \n1.Yes\n2.No");
+        int choose = scanner.nextInt();
+        if (choose == 1) {
+            System.out.println("Accept for another game");
+            whoWillWin();
         } else {
-            System.out.println("Computer won the toss");
-            while (true) {
-                computerMove();
-                System.out.println("Computer Board");
-                createBoard();
-                winner(computerTurn);
-                if (exitCode == '1') {
-                    break;
-                }
-                System.out.println("Your Turn");
-                moveLocation();
-                System.out.println("Your board");
-                createBoard();
-                winner(userTurn);
-                if (exitCode == '1') {
-                    break;
-                }
-            }
+            System.out.println("Rejected for the another game");
         }
-
     }
 }
